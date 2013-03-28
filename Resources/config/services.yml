@@ -1,0 +1,13 @@
+services:
+    djeg_jam.exec:
+        class: 'Djeg\JamBundle\Executor\JamExec'
+        arguments: [ '%djeg_jam.jam%' ]
+    djeg_jam.twig_extension:
+        class: "Djeg\JamBundle\Twig\JamExtension"
+        calls:
+            - [ injector, ['@service_container']]
+        tags:
+            - { name: 'twig.extension' }
+    djeg_jam.require_generator:
+        class: "Djeg\JamBundle\Generator\RequireGenerator"
+        arguments: [ '@service_container' ]
