@@ -10,11 +10,6 @@
 namespace Djeg\JamBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
-
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -26,14 +21,6 @@ class JamController extends ContainerAware
 {
 	/**
 	 * Display the main script for Jam
-	 * 
-	 * @Route(
-	 * 		"/application.{_format}",
-	 * 		requirements={"_format" = "js"},
-	 * 		defaults={"_format" = "js"},
-	 * 		name="djeg_jam.application"
-	 * )
-	 * @Method({"GET"})
 	 */
 	public function applicationAction()
 	{

@@ -1,0 +1,21 @@
+{% if require %}
+
+{{require|raw}}
+
+{% endif %}
+
+{% if baseUrl and require %}
+
+jam['baseUrl'] = "{{baseUrl|raw}}";
+
+require.config(jam);
+
+{% endif %}
+
+
+// bundles bootstrap :
+{% for bootstrap in bootstraps %}
+
+{{bootstrap|raw}}
+
+{% endfor %}

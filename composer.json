@@ -1,0 +1,25 @@
+{
+    "name": "davidjegat/jam-bundle",
+    "type": "symfony-bundle",
+    "keywords": ["javascript", "package", "require", "manager"],
+    "homepage": "https://github.com/davidjegat/JamBundle",
+    "description": "Javascript package manager for Symfony2.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Jegat",
+            "email": "david.jegat@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.*",
+        "symfony/framework-bundle": ">=2.2.*",
+        "twig/twig": ">=1.12.2",
+        "sensio/generator-bundle": ">=2.2.*"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-0": { "Djeg\\JamBundle": "" }
+    },
+    "target-dir": "Djeg/JamBundle"
+}

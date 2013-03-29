@@ -42,18 +42,24 @@ class RequireGenerator extends Generator
 	/**
 	 * Generate the require.js file
 	 * 
+	 * @param boolean $bootstrap, generate just the bootstraped files
+	 * 
 	 * @return string
 	 */
-	public function generate()
+	public function generate($bootstrap = false)
 	{
-		if( file_exists($this->webDir.'/jam/require.js') ) {
-			$requireFile = file_get_contents($this->webDir.'/jam/require.js');
+		if( ! $bootstrap ) {
+			if( file_exists($this->webDir.'/jam/require.js') ) {
+				$requireFile = file_get_contents($this->webDir.'/jam/require.js');
+			} else {
+				throw new \RuntimeException('No jam require.js file exists, maybe you have to install jam. '.gettype($this->webDir));
+			}
 		} else {
-			throw new \RuntimeException('No jam require.js file exists, maybe you have to install jam. '.gettype($this->webDir));
+			$requireFile = false;
 		}
 
 		// Parse the bundles name and add the bundle web path if
-		// assets exists and the boostrap script (main.js)
+		// assets exists and the bootstrap script (main.js)
 		$bundlePaths = array();
 		$bootstraps = array();
 		foreach( $this->bundles as $b ){
@@ -67,7 +73,7 @@ class RequireGenerator extends Generator
 			}
 		}
 
-		return $this->render(__DIR__.'/../Resources/views', 'require.js.twig', array(
+		return $this->render(__DIR__.'/../Resources/skeleton', 'require.js.twig', array(
 			'require' => $requireFile,
 			'baseUrl' => $this->webServerPath,
 			'bundles' => $bundlePaths,

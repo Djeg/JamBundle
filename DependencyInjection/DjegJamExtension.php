@@ -34,8 +34,8 @@ class DjegJamExtension extends Extension
         $container->setParameter('djeg_jam.jam', $config['jam']);
         $container->setParameter('djeg_jam.uri', $config['uri']);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.xml');
     }
 
 }

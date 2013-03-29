@@ -1,4 +1,6 @@
 JamBundle
 =========
 
-Integrate the javascript package manager jam for symfony2
+Javascript client package manager. Based on the [jamjs](http://jamjs.org/) library for nodejs. This bundle
+provide a simple integration of jam into any symfony2 project.
+

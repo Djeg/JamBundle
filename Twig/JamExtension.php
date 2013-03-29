@@ -52,7 +52,16 @@ class JamExtension extends Twig_extension
 		if( $this->container->getParameter('kernel.environment') !== 'prod' ) {
 			$src = $this->container->get('router')->generate('djeg_jam.application', array('_format' => 'js'));
 		} else {
-			$src = $this->container->get('request')->getBasePath().'/app.min.js';
+			$basePath = $this->container->get('request')->getBasePath();
+			if( $basePath != '/'  and $basePath ) {
+				$src = $basePath.'/app.min.js';
+			} else {
+				if( $basePath ) {
+					$src = 'app.min.js';
+				} else {
+					$src = '/app.min.js';
+				}
+			}
 		}
 
 		return $src;
