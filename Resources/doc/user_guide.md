@@ -2,7 +2,7 @@ User's guide
 ============
 
 So, you have installed the JamBundle and read the 
-[introduction](https://github.com/davidjegat/JamBundle/Resources/doc/introduction.md) now
+[introduction](https://github.com/davidjegat/JamBundle/blob/master/Resources/doc/introduction.md) now
 your are ready for rocking !
 
 ## Initialize your package
