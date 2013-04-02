@@ -76,4 +76,4 @@ jam install jquery
 You can learn more about jam on the [official website](http://jamjs.org/docs).
 
 Now you are a little more familiar with Require.js and Jam, you can start to read
-the nest section : [user guide](https://github.com/davidjegat/JamBundle/Resources/doc/user_guide.md).
+the nest section : [user guide](https://github.com/davidjegat/JamBundle/blob/master/Resources/doc/user_guide.md).
