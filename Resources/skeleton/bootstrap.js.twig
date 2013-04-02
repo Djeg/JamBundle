@@ -1,0 +1,24 @@
+/**
+ * bootstrap.js
+ */
+require([ 
+	"domReady",
+	{{bootstraps|raw}} 
+], function(domReady){
+	// launched the initialize methods of registered
+	// bootstraps when the document is ready
+	var dom = domReady;
+	var args = Array.prototype.slice.call(arguments);
+	args.shift();
+	dom(function(){
+
+		for( i in args ){
+			if( typeof args[i] == "object" ){
+				if( typeof args[i]['initialize'] == "function" ){
+					args[i]['initialize']();
+				}
+			}
+		}
+
+	});
+});

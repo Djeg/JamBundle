@@ -36,10 +36,22 @@ class JamConfiguration implements ConfigurationInterface
 	        		->defaultValue('jam')
 	        		->info('The command or path to the jam binary (default to "jam").')
 	        	->end()
-	        	->scalarNode('uri')
+	        	->scalarNode('node')
 	        		->defaultNull()
+	        		->info('The path to the binary of your nodejs')
+	        	->end()
+	        	->scalarNode('rjs')
+	        		->defaultNull()
+	        		->info('The path to the binary r.js scripts')
+	        	->end()
+	        	->scalarNode('base_url')
+	        		->defaultValue('/')
 	        		->info('Precised the web uri from your server. You can set this option empty for a controller'.
 	        			' utilisation but you must precised a value when you compile your code')
+	        	->end()
+	        	->scalarNode('compiled_output')
+	        		->defaultValue('app.min.js')
+	        		->info('The compiled output file name (default to "app.min.js").')
 	        	->end()
 	        ->end();
 

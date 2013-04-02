@@ -7,7 +7,7 @@
 	<services>
 
 		<service id="djeg_jam.exec" class="Djeg\JamBundle\Executor\JamExec">
-			<argument>%djeg_jam.jam%</argument>
+			<argument type="service" id="service_container" />
 		</service>
 
 		<service id="djeg_jam.twig_extension" class="Djeg\JamBundle\Twig\JamExtension">
@@ -20,6 +20,21 @@
 		<service id="djeg_jam.require_generator" class="Djeg\JamBundle\Generator\RequireGenerator">
 			<argument type="service" id="service_container" />
 		</service>
+
+		<service id="djeg_jam.path_resolver" class="Djeg\JamBundle\Path\PathResolver">
+			<argument type="service" id="service_container" />
+		</service>
+
+		<service id="djeg_jam.bootstrap_generator" class="Djeg\JamBundle\Generator\BootstrapGenerator">
+			<argument type="service" id="service_container" />
+		</service>
+
+		<service id="djeg_jam.install_command" class="Djeg\JamBundle\Command\InstallCommand">
+			<call method="setContainer">
+            	<argument type="service" id="service_container" />
+        	</call>
+		</service>
+
 
 	</services>
 

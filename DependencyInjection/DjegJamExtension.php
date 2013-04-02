@@ -32,7 +32,10 @@ class DjegJamExtension extends Extension
 
         // set the jam binary path
         $container->setParameter('djeg_jam.jam', $config['jam']);
-        $container->setParameter('djeg_jam.uri', $config['uri']);
+        $container->setParameter('djeg_jam.base_url', $config['base_url']);
+        $container->setParameter('djeg_jam.compiled_output', $config['compiled_output']);
+        $container->setParameter('djeg_jam.rjs', $config['rjs']);
+        $container->setParameter('djeg_jam.node', $config['node']);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');

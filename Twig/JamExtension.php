@@ -33,6 +33,18 @@ class JamExtension extends Twig_extension
 	}
 
 	/**
+	 * Return the token parsers
+	 * 
+	 * @return array
+	 */
+	public function getTokenParsers()
+	{
+		return array(
+			new JamTokenParser($this->container)
+		);
+	}
+
+	/**
 	 * set the environment
 	 * 
 	 * @param Container $container
@@ -40,44 +52,5 @@ class JamExtension extends Twig_extension
 	public function injector($container)
 	{
 		$this->container = $container;
-	}
-
-	/**
-	 * Display the script tag for the jam require file
-	 * 
-	 * @return string
-	 */
-	public function getJamSrc()
-	{
-		if( $this->container->getParameter('kernel.environment') !== 'prod' ) {
-			$src = $this->container->get('router')->generate('djeg_jam.application', array('_format' => 'js'));
-		} else {
-			$basePath = $this->container->get('request')->getBasePath();
-			if( $basePath != '/'  and $basePath ) {
-				$src = $basePath.'/app.min.js';
-			} else {
-				if( $basePath ) {
-					$src = 'app.min.js';
-				} else {
-					$src = '/app.min.js';
-				}
-			}
-		}
-
-		return $src;
-	}
-
-	/**
-	 * Return the function
-	 * 
-	 * @return array
-	 */
-	public function getGlobals()
-	{
-		return array(
-			'jam' => array(
-				'src' => $this->getJamSrc()
-			)
-		);
 	}
 }

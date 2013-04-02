@@ -1,0 +1,14 @@
+{
+	"name": "",
+	"version": "",
+	"description": "",
+	"jam": {
+		"dependencies": {
+			"domReady": "2.*"
+		},
+		"config": {
+			"paths": {},
+			"baseUrl": "/"
+		}
+	}
+}

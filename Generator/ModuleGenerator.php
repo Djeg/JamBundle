@@ -17,14 +17,14 @@ use Sensio\Bundle\GeneratorBundle\Generator\Generator;
  * 
  * @author David jegat <david.jegat@gmail.com>
  */
-class JamGenerator extends Generator
+class ModuleGenerator extends Generator
 {
 
 	/**
 	 * @var string $skeletonDir
 	 * @access private
 	 */
-	private $skeletonDir;
+	protected $skeletonDir;
 
 	/**
 	 * Default constructor
@@ -72,13 +72,18 @@ class JamGenerator extends Generator
 	 * is the target file name. You can precise any directory by separate
 	 * your target path with a "/".
 	 * 
-	 * @param string $skeleton
-	 * @param string $target
-	 * @param array $parameters
+	 * @param string $module
 	 */
-	public function generate($skeleton, $target, $parameters)
+	public function generate($module)
 	{
-		$skeleton .= '.twig';
+		$skeleton = 'module.js.twig';
+
+		$target = $module.'.js';
+
+		$parameters = array(
+			'module' => $module
+		);
+
 		// test skeleton existence
 		if( ! file_exists($this->skeletonDir.'/'.$skeleton) ){
 			throw new \RuntimeException(

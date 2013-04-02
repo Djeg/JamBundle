@@ -14,7 +14,10 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Djeg\JamBundle\Generator\JamGenerator;
+use Djeg\JamBundle\Generator\ModuleGenerator;
+use Djeg\JamBundle\Generator\RequireGenerator;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 /**
  * This command generate a module into the given bundle. The default
@@ -81,16 +84,16 @@ class GenerateModuleCommand extends ContainerAwareCommand
 		if( ! is_dir($bundlePath.'/Resources/public') ) {
 			mkdir($bundlePath.'/Resources/public');
 		}
-		if( ! is_dir($bundlePath.'/Resources/public/js') ){
-			mkdir($bundlePath.'/Resources/public/js');
+		if( ! is_dir($bundlePath.'/Resources/public/scripts') ){
+			mkdir($bundlePath.'/Resources/public/scripts');
 		}
 
 		// Test the module existence :
-		if( file_exists($bundlePath.'/Resources/public/js/'.$module.'.js') ) {
+		if( file_exists($bundlePath.'/Resources/public/scripts/'.$module.'.js') ) {
 			$output->writeln('<info>The module '.$module.' always exists in the '.$bundle.' bundle !</info>');
 			if( ! $dialog->askConfirmation(
 				$output,
-				'Do you want to rewrite them? [no] ',
+				'<question>Do you want to rewrite them?[no]</question> ',
 				false
 			)) {
 				$output->writeln('<error>Module generation aborted</error>');
@@ -99,23 +102,18 @@ class GenerateModuleCommand extends ContainerAwareCommand
 		}
 
 		// generate the module :
-		$generator = new JamGenerator($bundlePath.'/Resources/public/js');
-		$canonicalModule = explode('/', $module);
-		$canonicalModule = array_pop($canonicalModule);
-		$generator->generate('module.js', $module.'.js', array(
-			'module' => str_replace('/', '.', $module),
-			'canonicalModule' => $canonicalModule
-		));
+		$generator = new ModuleGenerator($bundlePath.'/Resources/public/scripts');
+		$generator->generate($module);
 
-		// checking for bootstrap
-		if( ! file_exists($bundlePath.'/Resources/public/js/main.js') ) {
-			// ask for the bootstrap generation
-			if ( $dialog->askConfirmation(
-				$output,
-				'<info>Do you want to generate a bootstrap script (main.js)? [yes] </info>',
-				true
-			) ) {
-				$generator->generate('main.js', 'main.js', array());
+		// Ask for the generation of a main.js script called boostrap
+		if( ! file_exists($bundlePath.'/Resources/public/scripts/main.js') ) {
+			if( $dialog->ask(
+					$output,
+					'<question>Do you wan\'t to generate a bootstrap script (main.js)?[yes]</question> ',
+					true
+				) ) {
+				$gen = new RequireGenerator($bundlePath.'/Resources/public/scripts');
+				$gen->generate('main');
 			}
 		}
 
@@ -123,5 +121,9 @@ class GenerateModuleCommand extends ContainerAwareCommand
 			'<info>The module %s has been generate with success ;) !</info>',
 			$module
 		));
+
+		// Launched the update command :
+		$updateInput = new ArrayInput(array('bundle', null));
+		$this->getApplication()->find('djeg_jam:install')->run($updateInput, $output);
 	}
 }

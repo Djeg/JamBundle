@@ -1,21 +1,16 @@
-{% if require %}
+/**
+ * main.js
+ *
+ * Bundle bootstrap. Implement the initialize method
+ * that will be called on DOMReady.
+ */
+define([], function()
+{
+	var main = {};
 
-{{require|raw}}
+	main.initialize = function(){
+		// Dom Ready code here
+	}
 
-{% endif %}
-
-{% if baseUrl and require %}
-
-jam['baseUrl'] = "{{baseUrl|raw}}";
-
-require.config(jam);
-
-{% endif %}
-
-
-// bundles bootstrap :
-{% for bootstrap in bootstraps %}
-
-{{bootstrap|raw}}
-
-{% endfor %}
+	return main;
+});

@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Djeg\JamBundle\Packager\Packager;
 
 /**
  * Generate a compiled javascript with all your dependencies inside
@@ -43,33 +44,30 @@ class CompileCommand extends ContainerAwareCommand
 	{
 		$output->writeln('Compile your javascript ...');
 
-		// get the corect require.js :
-		$require = $this->getContainer()
-			->get('djeg_jam.require_generator')
-			->generate(true);
+		// Get the compiled output name
+		$compiledOutput = $this->getContainer()
+			->getParameter('djeg_jam.compiled_output');
 
-		// get the web directory :
-		$webDir = $this->getContainer()
-			->get('kernel')
-			->getRootDir().'/../web';
+		// get the pathresolver
+		$path = $this->getContainer()
+			->get('djeg_jam.path_resolver');
 
-		// create the new require :
-		file_put_contents($webDir.'/jam/bootstrap.js', $require);
+		// get packager
+		$packager = new Packager($path->getWebPath());
 
-		// change directory for a correct jam execution
-		$actDir = getcwd();
-		chdir($webDir);
+		// Generate the build.js file
+		$packager->generateBuild($path, $compiledOutput);
 
 		// execute the compile command from jam
 		$jam = $this->getContainer()
 			->get('djeg_jam.exec');
-		$jam->execute('compile app.min.js', array('include:jam/bootstrap.js'));
+		$jam->compile();
 
 		// Out jam result
 		$jam->out($output);
 
-		// Return to the corect directory
-		chdir($actDir);
+		// delete build.js
+		$packager->destroyBuild($path);
 
 		$output->writeln('<info>Javascript compiled !</info>'); 
 	}
