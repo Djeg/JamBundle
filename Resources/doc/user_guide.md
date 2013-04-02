@@ -42,6 +42,12 @@ php app/console djeg_jam:install
 Don't take care about your bundle packages. This command will concatenate all the 
 encountered `package.json` files from your bundles.
 
+You can also update your dependencies with this simple command.
+
+```
+php app/console djeg_jam:update
+```
+
 ## Generate your first module
 
 JamBundle comes with a cool module generation command. Just launch this command in the bundle of
@@ -55,9 +61,10 @@ It will ask you if you wan't to generate a bootstrap script for your bundle call
 `yes` (bundle bootstrap script is explained later). Now go into the `Resources/public/scripts'
 directory of your bundle and you should see two files :
 
-	- `main.js`
-	- `MyFirstModule.js`
-	- optionaly a `package.json` if you are generated it into your bundle before.
+* `main.js`
+* `MyFirstModule.js
+* optionaly a `package.json` file.
+
 
 ### Bootstrap script : `main.js`
 
@@ -137,3 +144,7 @@ You just have to launch this command to compile all your script :
 ```
 php app/console djeg_jam:compile
 ```
+
+## You wan't to see an sample application ?
+
+You can see a sample application into the [sample application](https://github.com/davidjegat/JamBundle/blob/master/Resources/doc/sample.md) exemple section.

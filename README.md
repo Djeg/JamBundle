@@ -15,7 +15,7 @@ this guide :
 -	[installation](https://github.com/davidjegat/JamBundle/blob/master/Resources/doc/installation.md)
 -	[introduction to jam and require.js](https://github.com/davidjegat/JamBundle/blob/master/Resources/doc/introduction.md)
 -	[user guide](https://github.com/davidjegat/JamBundle/blob/master/Resources/doc/user_guide.md)
--	[sample application](https://github.com/davidjegat/JamBundle/Resources/doc/sample.md)
+-	[sample application](https://github.com/davidjegat/JamBundle/blob/master/Resources/doc/sample.md)
 
 # External documentation
 

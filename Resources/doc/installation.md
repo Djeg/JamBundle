@@ -53,14 +53,6 @@ djeg_jam:
 
 ```
 
-## Testing the JamBundle
-
-Now run this command.
-
-```
-php app/console djeg_jam:jam help
-```
-
-It will display the list of jam command. You're ready for the introduction of 
-[jam and require.js]((https://github.com/davidjegat/JamBundle/Resources/doc/introduction.md) or
-if you are already familiar with them, the [user guide](https://github.com/davidjegat/JamBundle/Resources/doc/user_guide.md).
+You're ready for the introduction of 
+[jam and require.js](https://github.com/davidjegat/JamBundle/blob/master/Resources/doc/introduction.md) or
+if you are already familiar with them, the [user guide](https://github.com/davidjegat/JamBundle/blob/master/Resources/doc/user_guide.md).
