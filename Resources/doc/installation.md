@@ -1,7 +1,7 @@
 Installation
 ============
 
-For install jam bundle you need nodejs and jam installed on your system. For nodejs 
+For install jam bundle you need nodejs and jam installed on your system. For nodejs and npm
 please refer to the [official website](http://nodejs.org/)
 
 ## Install jamjs
@@ -29,15 +29,28 @@ bundle into your `AppKernel.php' file :
 	new Djeg\JamBundle\DjegJamBundle(),
 ```
 
-## Configure the JamBundle (optional)
+## Configure the JamBundle
 
-If you have installed jamjs with the npm command writing before you can skip this step.
-
-You can precised the `jam` binary path into your `app/config/config.yml` file like this :
+This is a complete configuration dumping.
 
 ```yaml
 djeg_jam:
-	jam: %kernel.root_dir%/path/to/jam
+
+    # The command or path to the jam binary (default to "jam").
+    jam:                  jam
+
+    # The path to the binary of your nodejs (required for compilation)
+    node:                 ~
+
+    # The path to the binary r.js scripts (required for compilation)
+    rjs:                  ~
+
+    # Precised the web uri from your server.
+    base_url:             /
+
+    # The compiled output file name.
+    compiled_output:      app.min.js
+
 ```
 
 ## Testing the JamBundle

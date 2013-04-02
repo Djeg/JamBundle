@@ -27,7 +27,7 @@ class DjegJamExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new JamConfiguration();
+        $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
         // set the jam binary path
@@ -39,6 +39,17 @@ class DjegJamExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+    }
+
+    /**
+     * Get the configuration
+     * 
+     * @return JamConfiguration
+     */
+    public function getConfiguration(array $config, ContainerBuilder $container)
+    {
+        $configuration = new JamConfiguration();
+        return $configuration;
     }
 
 }

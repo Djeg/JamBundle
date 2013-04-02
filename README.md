@@ -12,9 +12,9 @@ You want to install it for rocking with your javascripts ? No problem. You can r
 all the documentation about this bundle into the `Resources/doc` directory or follow
 this guide :
 
--	[installation](https://github.com/davidjegat/JamBundle/Resources/doc/installation.md)
--	[introduction to jam and require.js](https://github.com/davidjegat/JamBundle/Resources/doc/introduction.md)
--	[user guide](https://github.com/davidjegat/JamBundle/Resources/doc/user_guide.md)
+-	[installation](https://github.com/davidjegat/JamBundle/blob/master/Resources/doc/installation.md)
+-	[introduction to jam and require.js](https://github.com/davidjegat/JamBundle/blob/master/Resources/doc/introduction.md)
+-	[user guide](https://github.com/davidjegat/JamBundle/blob/master/Resources/doc/user_guide.md)
 -	[sample application](https://github.com/davidjegat/JamBundle/Resources/doc/sample.md)
 
 # External documentation

@@ -11,7 +11,8 @@ about those technologies, please read the officials documentations :
 
 Require js is a client side library that allow you to manage dependencies injections with the 
 AMD code structure. You can defined modules and inject some other modules in or require some
-dependencies and execute code with them.
+dependencies and execute code with them. All scripts is load asynchronously and can be
+compiled for a production mode.
 
 Define a module is very easy :
 
