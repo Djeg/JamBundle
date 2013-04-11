@@ -254,7 +254,7 @@ class Packager
  			throw new \RuntimeException('No directory seems to exists at '.$directory);
  		}
 
- 		return file_put_contents($directory.'/package.json', json_encode($this->content, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
+ 		return file_put_contents($directory.'/package.json', json_encode($this->content, ((version_compare(PHP_VERSION, '5.4.0') < 0) ? 0 : JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)));
  	}
 
  	/**
@@ -367,7 +367,7 @@ class Packager
 
  		$build['include'] = "jam/require";
 
- 		return file_put_contents($path->getWebPath().'/build.js' ,'('.json_encode($build, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES).')');
+ 		return file_put_contents($path->getWebPath().'/build.js' ,'('.json_encode($build, ((version_compare(PHP_VERSION, '5.4.0') < 0) ? 0 : JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)).')');
  	}
 
  	/**
