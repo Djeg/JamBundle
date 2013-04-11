@@ -107,7 +107,7 @@ class GenerateModuleCommand extends ContainerAwareCommand
 
 		// Ask for the generation of a main.js script called boostrap
 		if( ! file_exists($bundlePath.'/Resources/public/scripts/main.js') ) {
-			if( $dialog->ask(
+			if( $dialog->askConfirmation(
 					$output,
 					'<question>Do you wan\'t to generate a bootstrap script (main.js)?[yes]</question> ',
 					true
