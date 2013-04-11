@@ -11,6 +11,7 @@ namespace Djeg\JamBundle\Packager;
 
 use Djeg\JamBundle\Path\PathResolver;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use webignition\JsonPrettyPrinter\JsonPrettyPrinter;
 
 /**
  * This class generate a corect package.json with the given information.
@@ -24,6 +25,12 @@ class Packager
 	 * @access private
 	 */
 	private $content = array();
+
+	/**
+	 * @var JsonPrettyPrinter $formater
+	 * @access private
+	 */
+	private $formater;
 
 	/**
 	 * Merge package with the given bundles
@@ -254,7 +261,10 @@ class Packager
  			throw new \RuntimeException('No directory seems to exists at '.$directory);
  		}
 
- 		return file_put_contents($directory.'/package.json', json_encode($this->content, ((version_compare(PHP_VERSION, '5.4.0') < 0) ? 0 : JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)));
+ 		return file_put_contents(
+ 			$directory.'/package.json', 
+ 			$this->formater->format(json_encode($this->content))
+ 		);
  	}
 
  	/**
@@ -367,7 +377,10 @@ class Packager
 
  		$build['include'] = "jam/require";
 
- 		return file_put_contents($path->getWebPath().'/build.js' ,'('.json_encode($build, ((version_compare(PHP_VERSION, '5.4.0') < 0) ? 0 : JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES)).')');
+ 		return file_put_contents(
+ 			$path->getWebPath().'/build.js', 
+ 			'('.$this->formater->format(json_encode($build)).')'
+ 		);
  	}
 
  	/**
@@ -397,5 +410,7 @@ class Packager
  		} else {
  			$this->open(dirname(__DIR__).'/Resources/skeleton');
  		}
+
+ 		$this->formater = new JsonPrettyPrinter();
  	}
 }
